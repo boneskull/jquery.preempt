@@ -1,0 +1,41 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title><%= title %></title>
+<link rel="stylesheet" href="<%= cssPath %>" />
+</head>
+<body>
+
+<div id="mocha"></div>
+
+<!-- bower:js -->
+<!-- endbower -->
+
+<!-- mocha and assert module -->
+<script src="<%= assertPath %>"></script>
+<script src="<%= mochaPath %>"></script>
+<script>mocha.setup('bdd')</script>
+
+<!-- js src -->
+<% srcPaths.forEach(function (path) {  %><script src="<%= path %>"></script>
+<% }); %>
+
+<!-- test codes -->
+<% testPaths.forEach(function (path) {  %><script src="<%= path %>"></script>
+<% }); %>
+<!-- run test -->
+<script>
+<% if (checkLeaks) { %>
+mocha.checkLeaks();
+<% } %>
+window.onload = function () {
+  if (window.mochaPhantomJS) {
+    mochaPhantomJS.run();
+  } else {
+    mocha.run();
+  }
+};
+
+</script>
+</body>
+</html>

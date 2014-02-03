@@ -1,0 +1,29 @@
+{
+  "name": "jquery-preempt",
+  "version": "0.1.0",
+  "authors": [
+    "Christopher Hiller <chiller@badwing.com>"
+  ],
+  "description": "Pre-empt inline JavaScript",
+  "main": "jquery.preempt.js",
+  "keywords": [
+    "inline",
+    "javascript",
+    "jquery",
+    "plugin"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/boneskull/jquery-preempt",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "test/components",
+    "test",
+    "Gruntfile.js",
+    "jsdoc.conf.json",
+    "doc/**/*"
+  ],
+  "devDependencies": {
+    "jquery": "~2.1.0"
+  }
+}
