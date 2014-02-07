@@ -10,7 +10,7 @@ module.exports = function (grunt) {
       '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
       '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-      ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
+      ' Licensed <%= pkg.license %> */\n',
     // Task configuration.
     jshint: {
       gruntfile: {
@@ -42,6 +42,9 @@ module.exports = function (grunt) {
       test: {
         src: ['test/runner.html'],
         run: true
+      },
+      options: {
+        reporter: 'node_modules/mocha/lib/reporters/spec'
       }
     },
     jsdoc: {
@@ -61,6 +64,9 @@ module.exports = function (grunt) {
       }
     },
     uglify: {
+      options: {
+        banner: '<%= banner %>'
+      },
       main: {
         files: {
           'jquery.preempt.min.js': ['<%= pkg.main %>']
@@ -108,7 +114,8 @@ module.exports = function (grunt) {
 
   });
 
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  require('matchdep').filterDev(
+    ['grunt-*', '!grunt-cli']).forEach(grunt.loadNpmTasks);
 
   grunt.registerTask('test', ['jshint', 'mocha_html', 'bower', 'mocha']);
   grunt.registerTask('docs', ['clean', 'jsdoc']);

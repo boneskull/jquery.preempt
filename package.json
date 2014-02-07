@@ -22,8 +22,12 @@
     "mocha": "~1.17.1",
     "grunt-bump": "0.0.13",
     "matchdep": "~0.3.0",
-    "grunt-cli": "~0.1.13",
-    "mocha-lcov-reporter": "0.0.1",
-    "coveralls": "~2.7.1"
+    "grunt-cli": "~0.1.13"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Christopher Hiller",
+    "email": "chiller@badwing.com",
+    "url": "http://boneskull.github.io"
   }
 }
