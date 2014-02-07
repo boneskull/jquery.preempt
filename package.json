@@ -2,7 +2,7 @@
   "name": "jquery.preempt",
   "private": true,
   "main": "jquery.preempt.js",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "devDependencies": {
     "chai": "~1.9.0",
     "grunt": "~0.4.2",
