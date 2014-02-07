@@ -31,7 +31,10 @@ module.exports = function (grunt) {
         atBegin: true
       },
       all: {
-        files: ['<%= jshint.gruntfile.src %>', '<%= jshint.main.src %>', '<%= jshint.test.src %>', 'test/runner.html.ejs'],
+        files: [
+          '<%= jshint.gruntfile.src %>', '<%= jshint.main.src %>',
+          '<%= jshint.test.src %>', 'test/runner.html.ejs'
+        ],
         tasks: ['test']
       }
     },
@@ -64,12 +67,6 @@ module.exports = function (grunt) {
         }
       }
     },
-    release: {
-      options: {
-        file: 'bower.json',
-        npm: false
-      }
-    },
     bower: {
       install: {},
       options: {
@@ -79,22 +76,42 @@ module.exports = function (grunt) {
         }
       }
     },
-    clean: ['doc']
+    clean: ['doc'],
+    jquerymanifest: {
+      options: {
+        source: grunt.file.readJSON('bower.json'),
+        overrides: {
+          name: "jquery.preempt",
+          author: {
+            name: "Christopher Hiller",
+            email: "chiller@badwing.com",
+            url: "http://boneskull.github.io"
+          },
+          homepage: "http://github.com/boneskull/jquery.preempt"
+        }
+      }
+    },
+    bump: {
+      options: {
+        files: ['package.json', 'bower.json', 'jquery.preempt.jquery.json'],
+        updateConfigs: ['pkg'],
+        commit: true,
+        commitMessage: 'Release v%VERSION%',
+        commitFiles: ['-a'], // '-a' for all files
+        createTag: true,
+        tagName: 'v%VERSION%',
+        tagMessage: 'Version %VERSION%',
+        push: false,
+        pushTo: 'origin'
+      }
+    }
+
   });
 
-  // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-bower-task');
-  grunt.loadNpmTasks('grunt-mocha');
-  grunt.loadNpmTasks('grunt-jsdoc');
-  grunt.loadNpmTasks('grunt-mocha-html');
+  require('load-grunt-tasks')(grunt);
 
-  // Default task.
   grunt.registerTask('test', ['jshint', 'mocha_html', 'bower', 'mocha']);
   grunt.registerTask('docs', ['clean', 'jsdoc']);
-  grunt.registerTask('build', ['uglify']);
+  grunt.registerTask('build', ['uglify', 'jquerymanifest']);
   grunt.registerTask('default', ['test', 'docs', 'build']);
 };

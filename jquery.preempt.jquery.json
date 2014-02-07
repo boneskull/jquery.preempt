@@ -1,0 +1,27 @@
+{
+  "name": "jquery.preempt",
+  "version": "0.2.0",
+  "title": "jquery.preempt",
+  "author": {
+    "name": "Christopher Hiller",
+    "email": "chiller@badwing.com",
+    "url": "http://boneskull.github.io"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "*"
+  },
+  "description": "Pre-empt inline JavaScript",
+  "keywords": [
+    "inline",
+    "javascript",
+    "jquery",
+    "plugin"
+  ],
+  "homepage": "http://github.com/boneskull/jquery.preempt"
+}
