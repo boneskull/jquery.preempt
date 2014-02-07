@@ -1,12 +1,16 @@
 #jquery.preempt
 
+[![Build Status](https://travis-ci.org/boneskull/jquery.preempt.png?branch=master)](https://travis-ci.org/boneskull/jquery.preempt)
+[![Coverage Status](https://coveralls.io/repos/boneskull/jquery.preempt/badge.png)](https://coveralls.io/r/boneskull/jquery.preempt)
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
 [jQuery](http://jquery.com) plugin to take legacy inline JS (i.e. `onclick` and `href="javascript:..."` and create an event handler to be run *before* the inlined code.
 
-> #### (Why would I need this?)
+> ####(Why would I need this?)
 > My use case was that I was writing a [GreaseMonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) script against code with inline JS
 and my bindings were not behaving.  Works for me; your mileage may vary.
 
-## Usage
+##Usage
 
 ```javascript
 
@@ -27,3 +31,5 @@ $('button').preempt({
 });
 ```
 
+##Author
+[Christopher Hiller](http://boneskull.github.io)
