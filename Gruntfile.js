@@ -15,31 +15,35 @@ module.exports = function (grunt) {
     jshint: {
       gruntfile: {
         jshintrc: true,
-        src: 'Gruntfile.js'
+        src: __filename
       },
       main: {
         jshintrc: true,
-        src: ['<%=pkg.main%>', 'test/*-spec.js']
+        src: '<%=pkg.main%>'
+      },
+      test: {
+        jshintrc: true,
+        src: 'test/jquery.preempt.spec.js'
       }
     },
     watch: {
-      gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
+      options: {
+        atBegin: true
       },
-      main: {
-        files: '<%= jshint.main.src %>',
-        tasks: ['jshint:main', 'mocha']
+      all: {
+        files: ['<%= jshint.gruntfile.src %>', '<%= jshint.main.src %>', '<%= jshint.test.src %>', 'test/runner.html.ejs'],
+        tasks: ['test']
       }
     },
     mocha: {
       test: {
-        src: ['test/runner.html']
+        src: ['test/runner.html'],
+        run: true
       }
     },
     jsdoc: {
       main: {
-        src: ['<%= pkg.main %>', 'test/*-spec.js', 'README.md'],
+        src: ['<%= pkg.main %>', 'test/*.spec.js', 'README.md'],
         options: {
           configure: 'jsdoc.conf.json'
         }
@@ -48,17 +52,9 @@ module.exports = function (grunt) {
     mocha_html: {
       runner: {
         src: ['<%= pkg.main %>'],
-        test: ['test/*-spec.js'],
+        test: ['test/*.spec.js'],
         assert: 'chai',
-        checkLeaks: false,
         template: 'test/runner.html.ejs'
-      }
-    },
-    'bower-install': {
-
-      main: {
-        src: ['test/runner.html'],
-        devMode: true
       }
     },
     uglify: {
@@ -67,21 +63,38 @@ module.exports = function (grunt) {
           'jquery.preempt.min.js': ['<%= pkg.main %>']
         }
       }
-    }
-
+    },
+    release: {
+      options: {
+        file: 'bower.json',
+        npm: false
+      }
+    },
+    bower: {
+      install: {},
+      options: {
+        targetDir: 'test/components',
+        bowerOptions: {
+          production: false
+        }
+      }
+    },
+    clean: ['doc']
   });
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-jsdoc');
-  grunt.loadNpmTasks('grunt-bower-install');
   grunt.loadNpmTasks('grunt-mocha-html');
 
   // Default task.
-  grunt.registerTask('default',
-    ['jshint', 'mocha_html', 'bower-install', 'mocha', 'jsdoc', 'uglify']);
-
+  grunt.registerTask('test', ['jshint', 'mocha_html', 'bower', 'mocha']);
+  grunt.registerTask('docs', ['clean', 'jsdoc']);
+  grunt.registerTask('build', ['uglify']);
+  grunt.registerTask('default', ['test', 'docs', 'build']);
 };

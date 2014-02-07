@@ -1,6 +1,6 @@
 {
   "name": "jquery-preempt",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "authors": [
     "Christopher Hiller <chiller@badwing.com>"
   ],
@@ -24,6 +24,7 @@
     "doc/**/*"
   ],
   "devDependencies": {
-    "jquery": "~2.1.0"
+    "jquery": "~2.1.0",
+    "sinonjs": "~1.7.3"
   }
 }

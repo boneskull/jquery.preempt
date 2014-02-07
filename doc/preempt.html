@@ -38,8 +38,6 @@
     
     
         
-            <div class="description"><p>Takes legacy inline JS (i.e. <code>onclick</code> and <code>href=\&quot;javascript:...\&quot;</code> and creates an event handler to be run before the inlined code.</p></div>
-        
         
         
 <dl class="details">
@@ -64,7 +62,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jquery.preempt.js.html">jquery.preempt.js</a>, <a href="jquery.preempt.js.html#line7">line 7</a>
+        <a href="jquery.preempt.js.html">jquery.preempt.js</a>, <a href="jquery.preempt.js.html#line1">line 1</a>
     </li></ul></dd>
     
     
@@ -76,18 +74,6 @@
 </dl>
 
         
-        
-            <h3>Example</h3>
-            
-    <pre class="prettyprint"><code>// given &lt;button onclick="doSomething()">do something&lt;/button>
-// or &lt;a href="javascript:doSomethingElse()">do something else&lt;/a>
-$('button').preempt('onclick', 'click', function doSomethingBeforeSomething() {
-  // do something else
-});
-
-// restores the `onclick` attribute of the element
-$('button').restore('onclick', 'click');</code></pre>
-
         
     
     </div>
@@ -99,272 +85,9 @@ $('button').restore('onclick', 'click');</code></pre>
     
     
     
-        <h3 class="subsection-title">Classes</h3>
-        
-        <dl>
-            <dt><a href="preempt.Preempt.html">Preempt</a></dt>
-            <dd></dd>
-        </dl>
     
     
     
-    
-    
-        <h3 class="subsection-title">Members</h3>
-        
-        <dl>
-            
-<dt>
-    <h4 class="name" id="cfg_container_id"><span class="type-signature">&lt;private, static> </span>cfg_container_id<span class="type-signature"> :string</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">string</span>
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jquery.preempt.js.html">jquery.preempt.js</a>, <a href="jquery.preempt.js.html#line47">line 47</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="instance_id"><span class="type-signature">&lt;private, static> </span>instance_id<span class="type-signature"> :string</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>instance_id</p>
-    </div>
-    
-    
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">string</span>
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jquery.preempt.js.html">jquery.preempt.js</a>, <a href="jquery.preempt.js.html#line40">line 40</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="PLUGIN_NAME"><span class="type-signature">&lt;private, static, constant> </span>PLUGIN_NAME<span class="type-signature"> :string</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>plugin identifier</p>
-    </div>
-    
-    
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">string</span>
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jquery.preempt.js.html">jquery.preempt.js</a>, <a href="jquery.preempt.js.html#line32">line 32</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="SCRIPT_URL"><span class="type-signature">&lt;private, static, constant> </span>SCRIPT_URL<span class="type-signature"> :string</span></h4>
-    
-    
-</dt>
-<dd>
-    
-    <div class="description">
-        <p>Script URL prefix.  JSHint hates this.</p>
-    </div>
-    
-    
-    
-        <h5>Type:</h5>
-        <ul>
-            <li>
-                
-<span class="param-type">string</span>
-
-
-            </li>
-        </ul>
-    
-
-    
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jquery.preempt.js.html">jquery.preempt.js</a>, <a href="jquery.preempt.js.html#line57">line 57</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-    
-    
-</dd>
-
-        </dl>
     
     
     
@@ -373,12 +96,16 @@ $('button').restore('onclick', 'click');</code></pre>
         <dl>
             
 <dt>
-    <h4 class="name" id="external:"jQuery.fn".preempt"><span class="type-signature">&lt;static> </span>external:"jQuery.fn".preempt<span class="signature">(attr, new_evt, <span class="optional">callback</span>)</span><span class="type-signature"> &rarr; {jQuery}</span></h4>
+    <h4 class="name" id="jQuery.fn.preempt"><span class="type-signature">&lt;static> </span>jQuery.fn.preempt<span class="signature">(opts, callback)</span><span class="type-signature"> &rarr; {jQuery}</span></h4>
     
     
 </dt>
 <dd>
     
+    
+    <div class="description">
+        <p>Takes legacy inline JS (i.e. <code>onclick</code> and <code>href=&quot;javascript:...&quot;</code> and creates an event handler to be run before the inlined code.</p>
+    </div>
     
 
     
@@ -402,8 +129,6 @@ $('button').restore('onclick', 'click');</code></pre>
 		<th>Type</th>
 		
 		
-		<th>Argument</th>
-		
 		
 		
 		
@@ -416,62 +141,27 @@ $('button').restore('onclick', 'click');</code></pre>
 	
         <tr>
             
-                <td class="name"><code>attr</code></td>
+                <td class="name"><code>opts</code></td>
             
             
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">Object</span>
 
 
             
             </td>
             
             
-                <td class="attributes">
-                
-                    
-                
-                    
-                
-                </td>
             
             
             
-            
-            <td class="description last"><p>Attribute to remove and interpret</p></td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>new_evt</code></td>
-            
-            
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-            
-            
-                <td class="attributes">
-                
-                    
-                
-                    
-                
-                </td>
-            
-            
-            
-            
-            <td class="description last"><p>Event type to create</p></td>
+            <td class="description last"><ul>
+<li><code>attr</code> is the attribute you want to replace</li>
+<li><code>event</code> is the new event to bind</li>
+<li><code>restore</code> will restore the node's original behavior.</li>
+</ul></td>
         </tr>
 	
 	
@@ -491,20 +181,10 @@ $('button').restore('onclick', 'click');</code></pre>
             </td>
             
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-                    
-                
-                    
-                
-                </td>
             
             
             
-            
-            <td class="description last"><p>Callback to execute when event triggers</p></td>
+            <td class="description last"><p>Event handler callback function</p></td>
         </tr>
 	
 	
@@ -535,7 +215,7 @@ $('button').restore('onclick', 'click');</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jquery.preempt.js.html">jquery.preempt.js</a>, <a href="jquery.preempt.js.html#line149">line 149</a>
+        <a href="jquery.preempt.js.html">jquery.preempt.js</a>, <a href="jquery.preempt.js.html#line139">line 139</a>
     </li></ul></dd>
     
     
@@ -543,6 +223,13 @@ $('button').restore('onclick', 'click');</code></pre>
     
     
     
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>Document more thoroughly.</li>
+        </ul>
+    </dd>
     
 </dl>
 
@@ -560,7 +247,7 @@ $('button').restore('onclick', 'click');</code></pre>
     
             
 <div class="param-desc">
-    <p>A jQuery element</p>
+    <p>A jQuery obj</p>
 </div>
 
 
@@ -580,6 +267,25 @@ $('button').restore('onclick', 'click');</code></pre>
         
     
     
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>// given &lt;button onclick="doSomething()">do something&lt;/button>
+// or &lt;a href="javascript:doSomethingElse()">do something else&lt;/a>
+$('button').preempt({
+  attr: 'onclick',
+  event: 'click',
+}, function doSomethingBeforeSomething() {
+  // do something else
+});
+
+// restores the "onclick" attribute of the element
+$('button').preempt({
+  attr: 'onclick',
+  event: 'click',
+  restore: true
+});</code></pre>
+
+    
 </dd>
 
         </dl>
@@ -598,13 +304,13 @@ $('button').restore('onclick', 'click');</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="preempt.Preempt.html">Preempt</a></li></ul><h3>Namespaces</h3><ul><li><a href="preempt.html">preempt</a></li></ul>
+    <h2><a href="index.html">Index</a></h2><h3>Namespaces</h3><ul><li><a href="preempt.html">preempt</a></li></ul>
 </nav>
 
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha4</a> on Mon Feb 03 2014 02:08:20 GMT-0800 (PST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha4</a> on Fri Feb 07 2014 00:25:38 GMT-0800 (PST)
 </footer>
 
 <script> prettyPrint(); </script>

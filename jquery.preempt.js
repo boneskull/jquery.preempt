@@ -1,31 +1,15 @@
-/**
- * The jQuery plugin namespace.
- * @external "jQuery.fn"
- * @see {@link http://docs.jquery.com/Plugins/Authoring The jQuery Plugin Guide}
- */
+/*jshint -W107*/
 
 /**
- * @description Takes legacy inline JS (i.e. `onclick` and `href=\"javascript:...\"` and creates an event handler to be run before the inlined code.
  * @namespace preempt
- * @example
- *
- * // given <button onclick="doSomething()">do something</button>
- * // or <a href="javascript:doSomethingElse()">do something else</a>
- * $('button').preempt('onclick', 'click', function doSomethingBeforeSomething() {
- *   // do something else
- * });
- *
- * // restores the `onclick` attribute of the element
- * $('button').restore('onclick', 'click');
  */
 
-(function ($, window, document, undefined) {
+(function ($) {
   'use strict';
 
   /**
    * @description plugin identifier
    * @type {string}
-   * @memberOf preempt
    * @private
    * @const
    */
@@ -34,23 +18,13 @@
     /**
      * @description instance_id
      * @type {string}
-     * @memberOf preempt
      * @private
      */
       instance_id = "plugin." + PLUGIN_NAME,
 
     /**
-     * @memberOf preempt
-     * @type {string}
-     * @private
-     */
-      cfg_container_id = instance_id + '.preempted',
-
-  /*jshint -W107*/
-    /**
      * Script URL prefix.  JSHint hates this.
      * @type {string}
-     * @memberOf preempt
      * @private
      * @const
      */
@@ -59,8 +33,7 @@
     /**
      * @description Class representing an instance of the Preempt plugin.
      * @param {jQuery} element jQuery element to preempt
-     * @memberOf preempt
-     * @returns {Preempt}
+     * @private
      * @constructor
      */
       Preempt = function Preempt(element) {
@@ -68,23 +41,21 @@
       /**
        * Name of this plugin
        * @type {string}
-       * @memberOf Preempt
-       * @private
+       * @protected
        */
       this._name = PLUGIN_NAME;
 
       /**
        * jQuery element to preempt
-       * @memberOf Preempt
        * @type {jQuery}
+       * @protected
        */
-      this.element = element;
+      this._element = element;
 
       /**
        * Whether or not to prepend "javascript:" to the attr string when restoring
        * @type {boolean}
-       * @memberOf Preempt
-       * @private
+       * @protected
        */
       this._prefix = false;
     };
@@ -94,13 +65,18 @@
    * @param attr
    * @param new_evt
    * @param callback
+   * @param js_id
    * @method
-   * @memberOf Preempt
+   * @throws Error
    */
-  Preempt.prototype.init = function init(attr, new_evt, callback) {
-    var el = this.element,
-      js = el.attr(attr),
-      preempt = this;
+  Preempt.prototype.init = function init(attr, new_evt, js_id, callback) {
+    var el = this._element,
+      js = el.attr(attr) || '',
+      preemptor = function preemptor(evt) {
+        callback.call(el, evt);
+        /*jshint -W061*/
+        return eval('(function(){ ' + js + '}).call(window);');
+      };
     callback = callback || $.noop;
 
     if (js.indexOf(SCRIPT_URL) === 0) {
@@ -110,23 +86,10 @@
 
     el.removeAttr(attr)
       .off(new_evt)
-      .on(new_evt, function preemptor(evt) {
-        var ret_val;
-        try {
-          /*jshint -W061*/
-          ret_val = eval('+function(' + js + ')()');
-        } catch (e) {
-          //TODO: find a decent way to destroy the plugin if this happens
-          window.alert('jquery-preempt: terrible error; expect the unexpected');
-          //TODO: not sure of the easiest way to call this; investigate the object's prototype and see
-          preempt.restore(attr, new_evt);
-          return false;
-        }
-        callback.call(this, evt);
-        return ret_val;
-      });
+      .on(new_evt, preemptor);
+
     // store it so we can easily restore it
-    el.data(PLUGIN_NAME + '.' + attr + '.' + new_evt + '.js', js);
+    el.data(js_id, js);
 
   };
 
@@ -135,45 +98,77 @@
    * @param attr
    * @param new_evt
    * @method
-   * @memberOf Preempt
+   * @param js_id
    */
-  Preempt.prototype.restore = function restore(attr, new_evt) {
-    var el = this.element,
-      preempted = el.data(cfg_container_id),
-      js = el.data(PLUGIN_NAME + '.' + attr + '.' + new_evt + '.js');
+  Preempt.prototype.restore = function restore(attr, new_evt, js_id) {
+    var el = this._element,
+      js = el.data(js_id);
     el.attr(attr, this._prefix ? SCRIPT_URL + js : js)
       .off(new_evt);
-    delete preempted[attr + new_evt];
+    el.removeData(js_id);
   };
 
   /**
-   * @function external:"jQuery.fn".preempt
+   * @description Takes legacy inline JS (i.e. `onclick` and `href="javascript:..."` and creates an event handler to be run before the inlined code.
+   * @todo Document more thoroughly.
+   * @example
+   *
+   * // given <button onclick="doSomething()">do something</button>
+   * // or <a href="javascript:doSomethingElse()">do something else</a>
+   * $('button').preempt({
+   *   attr: 'onclick',
+   *   event: 'click',
+   * }, function doSomethingBeforeSomething() {
+   *   // do something else
+   * });
+   *
+   * // restores the "onclick" attribute of the element
+   * $('button').preempt({
+   *   attr: 'onclick',
+   *   event: 'click',
+   *   restore: true
+   * });
    * @this jQuery
-   * @param {string} attr Attribute to remove and interpret
-   * @param {string} new_evt Event type to create
-   * @param {function=} callback Callback to execute when event triggers
+   * @param {Object} opts
+   * - `attr` is the attribute you want to replace
+   * - `event` is the new event to bind
+   * - `restore` will restore the node's original behavior.
+   * @param {Function=} callback Event handler callback function
+   * @returns {jQuery} A jQuery obj
    * @memberOf preempt
-   * @returns {jQuery} A jQuery element
    */
-  $.fn.preempt = function preempt(attr, new_evt, callback) {
-    return this.each(function () {
-      var instance = this.data(instance_id),
-        preempted;
+  jQuery.fn.preempt = function preempt(opts, callback) {
+    var $this = $(this);
+    return $this.each(function () {
+      var instance = $this.data(instance_id),
+        attr = opts.attr,
+        new_evt = opts.event,
+        restore = !!opts.restore,
+        js_id;
+
+      callback = callback || $.noop;
+
+      if (!(attr && new_evt)) {
+        throw new Error('jquery-preempt: options.attr and opts.event are required');
+      }
+
+      js_id = instance_id + '.' + attr + '.' + new_evt + '.js';
+
       if (!instance) {
-        instance = new Preempt(this);
-        this.data(instance_id, instance);
+        // if we don't have an instance, restore() does nothing.
+        if (opts.restore) {
+          return;
+        }
+        instance = new Preempt($this);
+        $this.data(instance_id, instance);
       }
-      if ($.type(attr) === 'string' && $.type(new_evt) === 'undefined') {
-        return instance[attr].apply(instance, arguments);
-      }
-      preempted = this.data(cfg_container_id);
-      if ($.type(preempted) === 'undefined') {
-        preempted = this.data(cfg_container_id, {});
-      }
-      if (!preempted[attr + new_evt]) {
-        instance.init(attr, new_evt, callback);
+      if (!$this.data(js_id)) {
+        instance.init(attr, new_evt, js_id, callback);
+      } else if (restore) {
+        instance.restore(attr, new_evt, js_id);
       }
     });
   };
 
-})(jQuery, window, document);
+
+})(jQuery);

@@ -9,8 +9,15 @@
   "undef": true,
   "strict": true,
   "browser": true,
+  "node": true,
   "globals": {
     "jQuery": true,
-    "grunt": true
+    "$": true,
+    "describe": true,
+    "it": true,
+    "beforeEach": true,
+    "afterEach": true,
+    "sinon": true,
+    "chai": true
   }
 }
