@@ -2,6 +2,7 @@
   "name": "jquery-preempt",
   "private": true,
   "main": "jquery.preempt.js",
+  "version": "0.2.1",
   "devDependencies": {
     "chai": "~1.9.0",
     "grunt": "~0.4.2",
@@ -15,8 +16,8 @@
     "grunt-mocha": "~0.4.10",
     "grunt-mocha-html": "git://github.com/boneskull/grunt-mocha-html.git",
     "jsdoc": "~3.3.0-alpha4",
-    "load-grunt-tasks": "~0.3.0",
     "mocha": "~1.17.1",
-    "grunt-bump": "0.0.13"
+    "grunt-bump": "0.0.13",
+    "matchdep": "~0.3.0"
   }
 }

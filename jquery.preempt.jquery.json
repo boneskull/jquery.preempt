@@ -1,6 +1,6 @@
 {
   "name": "jquery.preempt",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "title": "jquery.preempt",
   "author": {
     "name": "Christopher Hiller",
@@ -16,7 +16,7 @@
   "dependencies": {
     "jquery": "*"
   },
-  "description": "Pre-empt inline JavaScript",
+  "description": "Takes legacy inline JS (i.e. 'onclick' and 'href=\"javascript:...\"' and creates an event handler to be run before the inlined code.",
   "keywords": [
     "inline",
     "javascript",
