@@ -2,7 +2,7 @@
     "name": "jquery.preempt",
     "private": true,
     "main": "jquery.preempt.js",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "scripts": {
         "test": "grunt test"
     },
