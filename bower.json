@@ -21,7 +21,8 @@
     "test",
     "Gruntfile.js",
     "jsdoc.conf.json",
-    "doc/**/*",
+    "doc",
+    "package.json",
     "jquery.preempt.jquery.json"
   ],
   "devDependencies": {

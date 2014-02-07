@@ -149,7 +149,7 @@
       callback = callback || $.noop;
 
       if (!(attr && new_evt)) {
-        throw new Error('jquery-preempt: options.attr and opts.event are required');
+        throw new Error('jquery.preempt: options.attr and opts.event are required');
       }
 
       js_id = instance_id + '.' + attr + '.' + new_evt + '.js';
