@@ -1,23 +1,26 @@
 {
-  "name": "jquery.preempt",
-  "private": true,
-  "main": "jquery.preempt.js",
-  "version": "0.2.3",
-  "devDependencies": {
-    "chai": "~1.9.0",
-    "grunt": "~0.4.2",
-    "grunt-bower-task": "~0.3.4",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-jshint": "~0.7.2",
-    "grunt-contrib-uglify": "~0.2.7",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-jquerymanifest": "~0.1.4",
-    "grunt-jsdoc": "git://github.com/JerrySievert/grunt-jsdoc-plugin.git",
-    "grunt-mocha": "~0.4.10",
-    "grunt-mocha-html": "git://github.com/boneskull/grunt-mocha-html.git",
-    "jsdoc": "~3.3.0-alpha4",
-    "mocha": "~1.17.1",
-    "grunt-bump": "0.0.13",
-    "matchdep": "~0.3.0"
-  }
+    "name": "jquery.preempt",
+    "private": true,
+    "main": "jquery.preempt.js",
+    "version": "0.2.3",
+    "scripts": {
+        "test": "grunt test"
+    },
+    "devDependencies": {
+        "chai": "~1.9.0",
+        "grunt": "~0.4.2",
+        "grunt-bower-task": "~0.3.4",
+        "grunt-contrib-clean": "~0.5.0",
+        "grunt-contrib-jshint": "~0.7.2",
+        "grunt-contrib-uglify": "~0.2.7",
+        "grunt-contrib-watch": "~0.5.3",
+        "grunt-jquerymanifest": "~0.1.4",
+        "grunt-jsdoc": "git://github.com/JerrySievert/grunt-jsdoc-plugin.git",
+        "grunt-mocha": "~0.4.10",
+        "grunt-mocha-html": "git://github.com/boneskull/grunt-mocha-html.git",
+        "jsdoc": "~3.3.0-alpha4",
+        "mocha": "~1.17.1",
+        "grunt-bump": "0.0.13",
+        "matchdep": "~0.3.0"
+    }
 }
