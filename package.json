@@ -1,20 +1,6 @@
 {
   "name": "jquery-preempt",
-  "version": "0.1.0",
   "private": true,
-  "author": {
-    "name": "Christopher Hiller",
-    "email": "chiller@badwing.com"
-  },
-  "description": "Takes legacy inline JS (i.e. `onclick` and `href=\"javascript:...\"` and creates an event handler to be run before the inlined code.",
-  "engines": {
-    "node": ">= 0.10.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/boneskull/jquery-preempt.git"
-  },
-  "license": "MIT",
   "main": "jquery.preempt.js",
   "devDependencies": {
     "grunt": "~0.4.2",
