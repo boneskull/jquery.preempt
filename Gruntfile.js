@@ -22,7 +22,7 @@ module.exports = function (grunt) {
       main: {
         src: '<%=pkg.main%>'
       },
-      test: {
+      spec: {
         src: 'spec/jquery.preempt.spec.js'
       }
     },
@@ -39,7 +39,7 @@ module.exports = function (grunt) {
       }
     },
     mocha: {
-      test: {
+      spec: {
         src: ['spec/runner.html'],
         run: true
       },
@@ -61,6 +61,7 @@ module.exports = function (grunt) {
       runner: {
         src: ['<%= pkg.main %>'],
         test: ['spec/*.spec.js'],
+        html: 'spec/runner.html',
         assert: 'chai',
         template: 'spec/runner.html.ejs'
       }
