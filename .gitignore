@@ -1,4 +1,4 @@
 /node_modules/
-/test/runner.html
-/test/components
+/spec/runner.html
+/spec/components
 /.idea/

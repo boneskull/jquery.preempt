@@ -1,6 +1,6 @@
-/*global module:false*/
+'use strict';
+
 module.exports = function (grunt) {
-  'use strict';
 
   // Project configuration.
   grunt.initConfig({
@@ -13,17 +13,17 @@ module.exports = function (grunt) {
       ' Licensed <%= pkg.license %> */\n',
     // Task configuration.
     jshint: {
+      options: {
+        jshintrc: true
+      },
       gruntfile: {
-        jshintrc: true,
         src: __filename
       },
       main: {
-        jshintrc: true,
         src: '<%=pkg.main%>'
       },
       test: {
-        jshintrc: true,
-        src: 'test/jquery.preempt.spec.js'
+        src: 'spec/jquery.preempt.spec.js'
       }
     },
     watch: {
@@ -33,14 +33,14 @@ module.exports = function (grunt) {
       all: {
         files: [
           '<%= jshint.gruntfile.src %>', '<%= jshint.main.src %>',
-          '<%= jshint.test.src %>', 'test/runner.html.ejs'
+          '<%= jshint.test.src %>', 'spec/runner.html.ejs'
         ],
         tasks: ['test']
       }
     },
     mocha: {
       test: {
-        src: ['test/runner.html'],
+        src: ['spec/runner.html'],
         run: true
       },
       options: {
@@ -49,18 +49,20 @@ module.exports = function (grunt) {
     },
     jsdoc: {
       main: {
-        src: ['<%= pkg.main %>', 'test/*.spec.js', 'README.md'],
-        options: {
-          configure: 'jsdoc.conf.json'
-        }
+        jsdoc: './node_modules/.bin/jsdoc',
+        src: ['<%= pkg.main %>', 'spec/*.spec.js', 'README.md']
+      },
+      options: {
+        configure: 'jsdoc.conf.json'
       }
+
     },
     mocha_html: {
       runner: {
         src: ['<%= pkg.main %>'],
-        test: ['test/*.spec.js'],
+        test: ['spec/*.spec.js'],
         assert: 'chai',
-        template: 'test/runner.html.ejs'
+        template: 'spec/runner.html.ejs'
       }
     },
     uglify: {
@@ -76,7 +78,7 @@ module.exports = function (grunt) {
     bower: {
       install: {},
       options: {
-        targetDir: 'test/components',
+        targetDir: 'spec/components',
         bowerOptions: {
           production: false
         }
@@ -85,16 +87,7 @@ module.exports = function (grunt) {
     clean: ['doc'],
     jquerymanifest: {
       options: {
-        source: grunt.file.readJSON('bower.json'),
-        overrides: {
-          name: "jquery.preempt",
-          author: {
-            name: "Christopher Hiller",
-            email: "chiller@badwing.com",
-            url: "http://boneskull.github.io"
-          },
-          homepage: "http://github.com/boneskull/jquery.preempt"
-        }
+        source: grunt.file.readJSON('package.json')
       }
     },
     bump: {
@@ -120,5 +113,5 @@ module.exports = function (grunt) {
   grunt.registerTask('test', ['jshint', 'mocha_html', 'bower', 'mocha']);
   grunt.registerTask('docs', ['clean', 'jsdoc']);
   grunt.registerTask('build', ['uglify', 'jquerymanifest']);
-  grunt.registerTask('default', ['test', 'docs', 'build']);
+  grunt.registerTask('default', ['test', 'build', 'docs']);
 };

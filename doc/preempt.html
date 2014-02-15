@@ -96,7 +96,7 @@
         <dl>
             
 <dt>
-    <h4 class="name" id="jQuery.fn.preempt"><span class="type-signature">&lt;static> </span>jQuery.fn.preempt<span class="signature">(opts, callback)</span><span class="type-signature"> &rarr; {jQuery}</span></h4>
+    <h4 class="name" id="jQuery.fn.preempt"><span class="type-signature">&lt;static> </span>jQuery.fn.preempt<span class="signature">(options, <span class="optional">callback</span>)</span><span class="type-signature"> &rarr; {jQuery}</span></h4>
     
     
 </dt>
@@ -104,7 +104,7 @@
     
     
     <div class="description">
-        <p>Takes legacy inline JS (i.e. <code>onclick</code> and <code>href=&quot;javascript:...&quot;</code> and creates an event handler to be run before the inlined code.</p>
+        <p>Takes legacy inline JS (i.e. <code>onclick</code> and <code>href=&quot;javascript:...&quot;</code>) and creates event handler(s) to be run around the inlined code.</p>
     </div>
     
 
@@ -129,6 +129,8 @@
 		<th>Type</th>
 		
 		
+		<th>Argument</th>
+		
 		
 		
 		
@@ -141,7 +143,7 @@
 	
         <tr>
             
-                <td class="name"><code>opts</code></td>
+                <td class="name"><code>options</code></td>
             
             
             <td class="type">
@@ -154,13 +156,24 @@
             </td>
             
             
+                <td class="attributes">
+                
+                    
+                
+                    
+                
+                </td>
+            
             
             
             
             <td class="description last"><ul>
 <li><code>attr</code> is the attribute you want to replace</li>
 <li><code>event</code> is the new event to bind</li>
-<li><code>restore</code> will restore the node's original behavior.</li>
+<li><code>before</code> is a function you wish to execute <em>before</em> the inline handler.  The second parameter, <code>callback</code>, will be overridden by this function.  If this function returns <code>false</code> or halts immediate propagation, the inline function will not be called, and further <em>immediate</em> propagation of the event will not occur.</li>
+<li><code>after</code> is a function you wish to execute <em>after</em> the inline handler.  If this function returns <code>false</code> or halts immediate propagation, further <em>immediate</em> propagation of the event will not occur.</li>
+<li><code>forcePropagation</code> causes your <code>after</code> function to be executed <em>regardless</em> of whether the inline function stopped immediate propagation or returned <code>false</code>.  In this case, if the inline function happened to return <code>false,</code> the default action for the event (whatever that may be; see <a href="http://api.jquery.com/event.preventDefault/">http://api.jquery.com/event.preventDefault/</a>) <em>will</em> be prevented and bubbling will not occur.  If <code>after</code> is not present, this does nothing.</li>
+<li><code>data</code> is an object with keys <code>before</code>, and <code>after</code>.  The values will be passed, respectively, to the <code>before</code> and <code>after</code> functions as the <em>second</em> parameter (the first will be the Event itself).  A third key, <code>js</code>, is automatically added to the objects, and its value is the original contents of the <code>attr</code> attribute.  It will have the <code>javascript:</code> prefix stripped, if present.  It's worth remembering that the context (the <code>this</code>) of an inline function is the DOM element itself.</li>
 </ul></td>
         </tr>
 	
@@ -181,10 +194,20 @@
             </td>
             
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+                    
+                
+                    
+                
+                </td>
             
             
             
-            <td class="description last"><p>Event handler callback function</p></td>
+            
+            <td class="description last"><p>Event handler callback function to be executed <em>before</em> the inline handler.  Alias for <code>options.before</code>; if both are present then <code>options.before</code> will take precedence.</p></td>
         </tr>
 	
 	
@@ -215,7 +238,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="jquery.preempt.js.html">jquery.preempt.js</a>, <a href="jquery.preempt.js.html#line139">line 139</a>
+        <a href="jquery.preempt.js.html">jquery.preempt.js</a>, <a href="jquery.preempt.js.html#line188">line 188</a>
     </li></ul></dd>
     
     
@@ -228,6 +251,8 @@
     <dd class="tag-todo">
         <ul>
             <li>Document more thoroughly.</li>
+        
+            <li>support for delegate-style usage</li>
         </ul>
     </dd>
     
@@ -271,6 +296,8 @@
         
     <pre class="prettyprint"><code>// given &lt;button onclick="doSomething()">do something&lt;/button>
 // or &lt;a href="javascript:doSomethingElse()">do something else&lt;/a>
+
+// Basic usage:
 $('button').preempt({
   attr: 'onclick',
   event: 'click',
@@ -278,11 +305,29 @@ $('button').preempt({
   // do something else
 });
 
-// restores the "onclick" attribute of the element
+// Restoring the inline JS:
 $('button').preempt({
   attr: 'onclick',
   event: 'click',
   restore: true
+});
+
+// Fancy usage:
+$('button').preempt({
+  attr: 'onclick',
+  event: 'click',
+  before: function executedBeforeInlineJS(event, data) {
+    // stuff; return false to halt propagation to inline JS
+  },
+  after: function exectedAfterInlineJS(event, data) {
+    // things; return false to prevent the default action and stop propagation
+  },
+  // will execute the after() function even if the inlined JS returned false.
+  forcePropagation: true,
+  data: {
+    before: 'some data to be passed to the before() function',
+    after: 'some data to be passed to the after() function',
+  }
 });</code></pre>
 
     
@@ -310,7 +355,7 @@ $('button').preempt({
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha4</a> on Fri Feb 07 2014 00:25:38 GMT-0800 (PST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha4</a> on Fri Feb 14 2014 23:28:53 GMT-0800 (PST)
 </footer>
 
 <script> prettyPrint(); </script>

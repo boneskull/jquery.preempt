@@ -1,0 +1,42 @@
+<html>
+<body>
+
+<div id="mocha"></div>
+
+<!-- test frameworks -->
+<script src="components/sinonjs/sinon.js"></script>
+
+<!-- prereqs -->
+<script src="components/jquery/jquery.js"></script>
+
+<!-- mocha and assert module -->
+<script src="../node_modules/chai/chai.js"></script>
+<script src="../node_modules/mocha/mocha.js"></script>
+
+<script>
+  mocha.setup('bdd');
+</script>
+
+<!-- js src -->
+<script src="../jquery.preempt.js"></script>
+
+
+<!-- test codes -->
+<script src="jquery.preempt.spec.js"></script>
+
+<!-- run test -->
+<script>
+
+mocha.checkLeaks();
+
+window.onload = function () {
+  if (window.mochaPhantomJS) {
+    mochaPhantomJS.run();
+  } else {
+    mocha.run();
+  }
+};
+
+</script>
+</body>
+</html>

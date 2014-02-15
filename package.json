@@ -15,15 +15,17 @@
     "grunt-contrib-uglify": "~0.2.7",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-jquerymanifest": "~0.1.4",
-    "grunt-jsdoc": "git://github.com/JerrySievert/grunt-jsdoc-plugin.git",
     "grunt-mocha": "~0.4.10",
-    "grunt-mocha-html": "git://github.com/boneskull/grunt-mocha-html.git",
     "jsdoc": "~3.3.0-alpha4",
     "mocha": "~1.17.1",
     "grunt-bump": "0.0.13",
     "matchdep": "~0.3.0",
-    "grunt-cli": "~0.1.13"
+    "grunt-cli": "~0.1.13",
+    "grunt-jsdoc": "~0.5.1",
+    "grunt-mocha-html": "~0.3.0"
   },
+  "homepage": "http://boneskull.github.io/jquery.preempt",
+  "description": "Takes legacy inline JS (i.e. \"onclick\" and \"href='javascript:...'\") and creates event handler(s) to be run around the inlined code.",
   "license": "MIT",
   "author": {
     "name": "Christopher Hiller",

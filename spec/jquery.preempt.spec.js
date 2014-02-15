@@ -1,4 +1,7 @@
-/*jshint -W030, -W107*/
+/**
+ * TODO: Write tests against before/after/forcePropagate/data options as well
+ * as multi-element jQuery objects
+ */
 (function () {
   'use strict';
 

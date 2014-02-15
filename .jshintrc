@@ -10,7 +10,7 @@
   "strict": true,
   "browser": true,
   "node": true,
-  "globals": {
+  "predef": {
     "jQuery": true,
     "$": true,
     "describe": true,
@@ -19,5 +19,8 @@
     "afterEach": true,
     "sinon": true,
     "chai": true
-  }
+  },
+  "expr": true,
+  "scripturl": true,
+  "evil": true
 }

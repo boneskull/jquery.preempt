@@ -16,12 +16,6 @@
   "dependencies": {
     "jquery": "*"
   },
-  "description": "Takes legacy inline JS (i.e. 'onclick' and 'href=\"javascript:...\"' and creates an event handler to be run before the inlined code.",
-  "keywords": [
-    "inline",
-    "javascript",
-    "jquery",
-    "plugin"
-  ],
-  "homepage": "http://github.com/boneskull/jquery.preempt"
+  "description": "Takes legacy inline JS (i.e. \"onclick\" and \"href='javascript:...'\") and creates event handler(s) to be run around the inlined code.",
+  "homepage": "http://boneskull.github.io/jquery.preempt"
 }

@@ -4,21 +4,20 @@
   "authors": [
     "Christopher Hiller <chiller@badwing.com>"
   ],
-  "description": "Takes legacy inline JS (i.e. 'onclick' and 'href=\"javascript:...\"' and creates an event handler to be run before the inlined code.",
-  "main": "jquery.preempt.js",
+  "description": "Takes legacy inline JS (i.e. \"onclick\" and \"href='javascript:...'\") and creates event handler(s) to be run around the inlined code.",
   "keywords": [
     "inline",
     "javascript",
     "jquery",
-    "plugin"
+    "plugin",
+    "legacy"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/boneskull/jquery.preempt",
+  "homepage": "http://boneskull.github.io/jquery.preempt",
   "ignore": [
     "**/.*",
     "node_modules",
-    "test/components",
-    "test",
+    "spec",
     "Gruntfile.js",
     "jsdoc.conf.json",
     "doc",
