@@ -8,9 +8,7 @@ and `href="javascript:..."`) and create event handlers to be run before or
 after the inlined code (or both!).
 
 > #### (Why would I need this?)
-> My use case was that I was writing a [GreaseMonkey](https://addons.mozilla
-.org/en-US/firefox/addon/greasemonkey/)-like [script](https://github
-.com/boneskull/fb-bugmonkey-markdown) against a page with inline JS and my
+> My use case was that I was writing a [GreaseMonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/)-like [script](https://github.com/boneskull/fb-bugmonkey-markdown) against a page with inline JS and my
 jQuery events were not behaving.  Works for me; your mileage may vary.
 
 ## Usage
