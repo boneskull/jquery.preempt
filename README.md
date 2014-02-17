@@ -11,6 +11,10 @@ after the inlined code (or both!).
 > My use case was that I was writing a [GreaseMonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/)-like [script](https://github.com/boneskull/fb-bugmonkey-markdown) against a page with inline JS and my
 jQuery events were not behaving.  Works for me; your mileage may vary.
 
+## Installation
+
+Use the [jsDelivr CDN](http://www.jsdelivr.com/#!jquery.preempt).
+
 ## Usage
 
 ```javascript
