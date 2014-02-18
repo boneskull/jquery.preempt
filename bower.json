@@ -22,10 +22,10 @@
     "jsdoc.conf.json",
     "doc",
     "package.json",
+    "karma.conf.js",
     "jquery.preempt.jquery.json"
   ],
   "devDependencies": {
-    "jquery": "~2.1.0",
-    "sinonjs": "~1.7.3"
+    "jquery": "~2.1.0"
   }
 }

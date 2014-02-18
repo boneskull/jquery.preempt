@@ -58,6 +58,8 @@
       this._prefix = false;
     };
 
+  Preempt.prototype = Object.create({});
+
   /**
    * @description Replaces the inlined JS with an event handler which also eval's the inlined JS.
    * @param {Object} cfg Configuration object
@@ -68,7 +70,7 @@
         preemptor = function preemptor(evt) {
           var exec = function exec() {
               return eval('(function(event){ ' + js +
-                '}).call(el[0]);');
+                '}).call(el[0], evt);');
             },
             retval;
 
@@ -79,18 +81,22 @@
             return;
           }
           retval = exec();
-          if (retval === false && !forcePropagate) {
+          if (retval === false && !forcePropagation) {
             return false;
           }
-          if (evt.isImmediatePropagationStopped() && !forcePropagate) {
+          if (evt.isImmediatePropagationStopped() && !forcePropagation) {
             return;
           }
-          return (forcePropagate && retval === false) ? false :
-                 after.call(el, evt, data.after);
+          if (forcePropagation && retval === false) {
+            after.call(el, evt, data.after);
+          } else {
+            retval = after.call(el, evt, data.after);
+          }
+          return retval;
         },
         attr = cfg.attr,
         event = cfg.event,
-        forcePropagate = !!cfg.forcePropagate,
+        forcePropagation = !!cfg.forcePropagation,
         after = cfg.after || $.noop,
         before = cfg.before || cfg.callback || $.noop,
         data = cfg.data || {},
@@ -191,11 +197,16 @@
         instance = $this.data(instance_id),
         cfg,
         js_id,
-        attr = options.attr,
-        restore = !!options.restore,
-        new_evt = options.event;
+        attr,
+        restore,
+        new_evt;
 
-      callback = callback || $.noop;
+      if ($.type(options) === 'undefined') {
+        throw new Error('"options" object is required');
+      }
+      attr = options.attr;
+      restore = !!options.restore;
+      new_evt = options.event;
 
       if (!(attr && new_evt)) {
         throw new Error('jquery.preempt: options.attr and opts.event are required');
@@ -220,6 +231,8 @@
       }
     });
   };
+  // exposed for unit tests, but do what you will.
+  jQuery.fn.preempt.Preempt = Preempt;
 
 
 })(jQuery);

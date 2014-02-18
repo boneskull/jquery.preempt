@@ -2,11 +2,10 @@
 
 module.exports = function (grunt) {
 
-  // Project configuration.
   grunt.initConfig({
-    // Metadata.
+
     pkg: grunt.file.readJSON('package.json'),
-    // Task configuration.
+
     jshint: {
       options: {
         jshintrc: true
@@ -14,53 +13,22 @@ module.exports = function (grunt) {
       gruntfile: {
         src: __filename
       },
-      main: {
-        src: '<%=pkg.main%>'
-      },
-      spec: {
-        src: 'spec/jquery.preempt.spec.js'
-      }
-    },
-    watch: {
-      options: {
-        atBegin: true
-      },
       all: {
-        files: [
-          '<%= jshint.gruntfile.src %>', '<%= jshint.main.src %>',
-          '<%= jshint.test.src %>', 'spec/runner.html.ejs'
-        ],
-        tasks: ['test']
+        src: ['<%= pkg.main %>', 'spec/jquery.preempt.spec.js']
       }
     },
-    mocha: {
-      spec: {
-        src: ['spec/runner.html'],
-        run: true
-      },
-      options: {
-        reporter: 'node_modules/mocha/lib/reporters/spec'
-      }
-    },
+
     jsdoc: {
       main: {
         jsdoc: './node_modules/.bin/jsdoc',
-        src: ['<%= pkg.main %>', 'spec/*.spec.js', 'README.md']
+        src: ['<%= pkg.main %>', 'README.md']
       },
       options: {
         configure: 'jsdoc.conf.json'
       }
 
     },
-    mocha_html: {
-      runner: {
-        src: ['<%= pkg.main %>'],
-        test: ['spec/*.spec.js'],
-        html: 'spec/runner.html',
-        assert: 'chai',
-        template: 'spec/runner.html.ejs'
-      }
-    },
+
     uglify: {
       main: {
         files: {
@@ -68,6 +36,7 @@ module.exports = function (grunt) {
         }
       }
     },
+
     bower: {
       install: {},
       options: {
@@ -77,12 +46,15 @@ module.exports = function (grunt) {
         }
       }
     },
+
     clean: ['doc'],
+
     jquerymanifest: {
       options: {
         source: grunt.file.readJSON('package.json')
       }
     },
+
     bump: {
       options: {
         files: ['package.json', 'bower.json', 'jquery.preempt.jquery.json'],
@@ -96,6 +68,13 @@ module.exports = function (grunt) {
         push: true,
         pushTo: 'origin'
       }
+    },
+
+    karma: {
+      options: {
+        configFile: 'karma.conf.js',
+        singleRun: true
+      }
     }
 
   });
@@ -103,7 +82,7 @@ module.exports = function (grunt) {
   require('matchdep').filterDev(
     ['grunt-*', '!grunt-cli']).forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('test', ['jshint', 'mocha_html', 'bower', 'mocha']);
+  grunt.registerTask('test', ['jshint', 'bower', 'karma']);
   grunt.registerTask('docs', ['clean', 'jsdoc']);
   grunt.registerTask('build', ['uglify', 'jquerymanifest']);
   grunt.registerTask('default', ['test', 'build', 'docs']);
