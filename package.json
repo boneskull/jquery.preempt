@@ -24,7 +24,8 @@
     "karma-sinon-chai": "~0.1.4",
     "karma-coverage": "~0.2.0",
     "karma-osx-reporter": "0.0.4",
-    "karma-story-reporter": "~0.2.2"
+    "karma-story-reporter": "~0.2.2",
+    "grunt-karma-coveralls": "~2.3.0"
   },
   "homepage": "http://boneskull.github.io/jquery.preempt",
   "description": "Takes legacy inline JS (i.e. \"onclick\" and \"href='javascript:...'\") and creates event handler(s) to be run around the inlined code.",

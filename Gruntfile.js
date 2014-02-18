@@ -37,6 +37,12 @@ module.exports = function (grunt) {
       }
     },
 
+    coveralls: {
+      options: {
+        coverage_dir: 'coverage/'
+      }
+    },
+
     bower: {
       install: {},
       options: {
@@ -72,8 +78,10 @@ module.exports = function (grunt) {
 
     karma: {
       options: {
-        configFile: 'karma.conf.js',
-        singleRun: true
+        configFile: 'karma.conf.js'
+      },
+      main: {
+         singleRun: true
       }
     }
 
@@ -82,7 +90,7 @@ module.exports = function (grunt) {
   require('matchdep').filterDev(
     ['grunt-*', '!grunt-cli']).forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('test', ['jshint', 'bower', 'karma']);
+  grunt.registerTask('test', ['jshint', 'bower', 'karma', 'coveralls']);
   grunt.registerTask('docs', ['clean', 'jsdoc']);
   grunt.registerTask('build', ['uglify', 'jquerymanifest']);
   grunt.registerTask('default', ['test', 'build', 'docs']);
