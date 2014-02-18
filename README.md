@@ -1,6 +1,7 @@
 # jquery.preempt
 
 [![Build Status](https://travis-ci.org/boneskull/jquery.preempt.png?branch=master)](https://travis-ci.org/boneskull/jquery.preempt)
+[![Coverage Status](https://coveralls.io/repos/boneskull/jquery.preempt/badge.png?branch=)](https://coveralls.io/r/boneskull/jquery.preempt?branch=master)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 [jQuery](http://jquery.com) plugin to take legacy inline JS (i.e. `onclick`
