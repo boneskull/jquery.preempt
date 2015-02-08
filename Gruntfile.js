@@ -90,7 +90,7 @@ module.exports = function (grunt) {
   require('matchdep').filterDev(
     ['grunt-*', '!grunt-cli']).forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('test', ['jshint', 'bower', 'karma', 'coveralls']);
+  grunt.registerTask('test', ['jshint', 'bower', 'karma']);
   grunt.registerTask('docs', ['clean', 'jsdoc']);
   grunt.registerTask('build', ['uglify', 'jquerymanifest']);
   grunt.registerTask('default', ['test', 'build', 'docs']);
